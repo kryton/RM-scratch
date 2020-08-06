@@ -1,0 +1,7 @@
+/*.txt
+/eosio.abi
+/eosio.wasm
+/blockchain
+nodeos.log
+nodeos.pid
+features.json

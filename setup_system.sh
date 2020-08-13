@@ -29,7 +29,7 @@ accounts="eosio.bpay eosio.bios eosio.msig eosio.names eosio.ramfee eosio.saving
 
 for k in $accounts
 do
-set_key ${wallet_name} ${k} ${SYSTEM_ACCOUNT_PUBLIC_KEY} ${SYSTEM_ACCOUNT_PRIVATE_KEY}
+	set_key ${wallet_name} ${k} ${SYSTEM_ACCOUNT_PUBLIC_KEY} ${SYSTEM_ACCOUNT_PRIVATE_KEY}
 done
 sleep 2s
 cleos set contract eosio ./ eosio.wasm eosio.abi
@@ -66,7 +66,7 @@ cleos push action eosio setpriv \["eosio.rex",1\] -p eosio
 cleos push action eosio setpriv \["eosio.ram",1\] -p eosio
 for k in $accounts
 do
-cleos push action eosio setpriv \["${k}",1\] -p eosio
+	cleos push action eosio setpriv \["${k}",1\] -p eosio
 done
 cleos set contract eosio.token ${_contract_loc}/build/contracts/eosio.token/ -p eosio.token
 
@@ -74,10 +74,8 @@ cleos push action eosio.token create '["eosio", "10000000000.0000 SYS",0,0,0]' -
 cleos push action eosio.token issue '["eosio","1000000000.0000 SYS", "issue"]' -p eosio
 cleos push action eosio init '["0", "4,SYS"]' -p eosio
 
-#exit
-
 cleos set contract eosio ${_contract_loc}/build/contracts/eosio.system/ -p eosio
 sleep 2s
 
-#cleos system newaccount eosio --transfer ${k} ${SYSTEM_ACCOUNT_PUBLIC_KEY} --stake-net "10000000.0000 SYS" --stake-cpu "10000000.0000 SYS" --buy-ram-kbytes 8192
+cleos system newaccount eosio eosio.reserv ${SYSTEM_ACCOUNT_PUBLIC_KEY} ${SYSTEM_ACCOUNT_PUBLIC_KEY}  --stake-net "1.0000 SYS" --stake-cpu "1.0000 SYS"   --buy-ram-bytes 8192
 

@@ -5,3 +5,4 @@
 nodeos.log
 nodeos.pid
 features.json
+/nohup.out

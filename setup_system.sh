@@ -77,5 +77,5 @@ cleos push action eosio init '["0", "4,SYS"]' -p eosio
 cleos set contract eosio ${_contract_loc}/build/contracts/eosio.system/ -p eosio
 sleep 2s
 
-cleos system newaccount eosio eosio.reserv ${SYSTEM_ACCOUNT_PUBLIC_KEY} ${SYSTEM_ACCOUNT_PUBLIC_KEY}  --stake-net "1.0000 SYS" --stake-cpu "1.0000 SYS"   --buy-ram-bytes 8192
-
+sys_new_key ${wallet_name}  eosio.reserv ${SYSTEM_ACCOUNT_PUBLIC_KEY} ${SYSTEM_ACCOUNT_PRIVATE_KEY}  "1.0000 SYS"  "1.0000 SYS" 8192
+#cleos system newaccount eosio eosio.reserv ${SYSTEM_ACCOUNT_PUBLIC_KEY} ${SYSTEM_ACCOUNT_PUBLIC_KEY}  --stake-net "1.0000 SYS" --stake-cpu "1.0000 SYS"   --buy-ram-bytes 8192

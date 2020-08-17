@@ -105,6 +105,56 @@ set_key() {
     cleos create account eosio ${key_name} ${public_key}  ${public_key}
 
 }
+# 
+sys_gen_key() {
+    wallet_name=$1
+    key_name=$2
+    stake_net=$3
+    stake_cpu=$4
+    ram_bytes=$5
+
+
+    key_file="$(dirname "$0")/key_${key_name}.txt"
+    public=""
+
+    if [ -f "${key_file}" ]; then
+        >&2 echo "key ${key_name} exists. skipping"
+        public=$(cat ${key_file})
+    else
+        declare -a arr
+
+        keys=$(cleos create key --to-console)
+        readarray arr <<< ${keys}
+        private=$(cut <<< ${arr[0]} -d ":" -f2)
+        public=$(cut <<< ${arr[1]} -d ":" -f2)
+
+        add_private_key ${wallet_name} ${key_name} ${public} ${private}
+    fi
+#    cleos create account eosio ${key_name} ${public} ${public}
+    cleos system newaccount eosio ${key_name} ${public} ${public}  --stake-net "${stake_net}" --stake-cpu "${stake_cpu}"   --buy-ram-bytes ${ram_bytes}
+
+}
+
+sys_new_key() {
+    wallet_name=$1
+    key_name=$2
+    public_key=$3
+    private_key=$4
+    stake_net=$5
+    stake_cpu=$6
+    ram_bytes=$7
+
+    key_file="$(dirname "$0")/key_${key_name}.txt"
+    rm -f ${key_file}
+
+    add_private_key ${wallet_name} ${key_name} ${public_key} ${private_key}
+    echo ${public_key} > ${key_file}
+
+    cleos system newaccount eosio ${key_name} ${public_key} ${public_key}  --stake-net "${stake_net}" --stake-cpu "${stake_cpu}"   --buy-ram-bytes ${ram_bytes}
+
+}
+
+
 
 function check_feature()
 {

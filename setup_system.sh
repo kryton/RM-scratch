@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-_eosio_version=2.0
+_eosio_version=2.1
 _eosio_loc=${HOME}/eosio/${_eosio_version}
 PATH=${_eosio_loc}/bin:${PATH}
-_contract_loc=${HOME}/eosio/eosio.contracts.rentbw/
+_contract_loc=${HOME}/src/eosio.contracts
 
 declare -i _rc
 
@@ -15,7 +15,7 @@ create_or_unlock_wallet ${wallet_name}
 
 add_private_key ${wallet_name} "SYSTEM" ${SYSTEM_ACCOUNT_PUBLIC_KEY} ${SYSTEM_ACCOUNT_PRIVATE_KEY}
 
-#cleos -u https://api.testnet.eos.io get code -c eosio.wasm -a eosio.abi --wasm eosio
+cleos -u https://api.testnet.eos.io get code -c eosio.wasm -a eosio.abi --wasm eosio
 
 curl --request POST \
      --url http://127.0.0.1:8888/v1/producer/schedule_protocol_feature_activations \

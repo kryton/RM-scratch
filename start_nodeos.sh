@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-_eosio_version=2.0
+_eosio_version=2.1
 _eosio_loc=${HOME}/eosio/${_eosio_version}
 PATH=${_eosio_loc}/bin:${PATH}
 rm -rf blockchain

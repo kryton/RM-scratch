@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-_eosio_version=2.0
+_eosio_version=2.1
 _eosio_loc=${HOME}/eosio/${_eosio_version}
-_contract_loc=${HOME}/eosio/eosio.contracts.rentbw/
+_contract_loc=${HOME}/src/eosio.contracts
 PATH=${_eosio_loc}/bin:${PATH}
 
 wallet_name="RM"
